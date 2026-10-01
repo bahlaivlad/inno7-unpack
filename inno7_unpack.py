@@ -164,7 +164,9 @@ def inflate(stream: bytes, compressed: bool, limit: int = MAX_BLOCK_OUTPUT):
         format=lzma.FORMAT_RAW, filters=[lzma1_filter(stream[:LZMA_PROPS_LEN])]
     )
     out = decoder.decompress(stream[LZMA_PROPS_LEN:], limit)
-    while not decoder.eof and len(out) < limit:
+    # needs_input means the stream ended early: draining further returns
+    # b"" forever, so stop and let the eof check below reject it.
+    while not decoder.eof and not decoder.needs_input and len(out) < limit:
         out += decoder.decompress(b"", limit - len(out))
     if not decoder.eof:
         raise ValueError("stream exceeds the output limit")
