@@ -181,13 +181,12 @@ each run's own prefix, so the literals come out byte-exact.
 
 ## Known gaps
 
-Contributions welcome on any of these:
+Contributions welcome. Each of these is filed with the measurements and dead ends
+already collected:
 
-- Revision-1 (Inno ≤ 6) offset-table layout, so the engine can be extracted from
-  older installers too.
-- Per-file extraction of bundled application files.
-- The exact call/jmp transform Inno applies to the engine. If you know which
-  variant Inno bundles, the `CRCEXE` field makes verification a one-liner.
+- [#1](../../issues/1) - the exact call/jmp transform Inno applies to the engine.
+- [#2](../../issues/2) - revision-1 (Inno <= 6) offset-table layout.
+- [#3](../../issues/3) - per-file extraction of bundled application files.
 
 ## License
 
